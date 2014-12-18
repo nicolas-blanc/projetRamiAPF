@@ -1,41 +1,56 @@
-# PROJECT
-MLIS=regle
-PCMIS=$(foreach lib, $(MLIS), $(addprefix $(lib),.cmi))
+# Makefile
+EXECUTABLES=
 
-LIB=MultiEnsemble Rummikub
-PCMAS=$(foreach lib, $(LIB), $(addprefix $(lib),.cma))
+MODULES=regle
+CMIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.cmi))
+MLIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.mli))
+
+LIBS=MultiEnsemble RRummikub
+CMOS=$(foreach lib, $(LIBS), $(addprefix $(lib),.cmo))
 
 # ENVIRONMENT
 OCAMLC=ocamlc
-INCLUDES=-I +lablGL
-OCAMLFLAGS=$(INCLUDES)
-LABLGLCMAS=lablgl.cma lablglut.cma unix.cma
 
 # BUILD RULES
-all: $(PCMAS) $(PCMIS)
+all: $(LIBS)
 
-%: $(PCMAS) %.ml
-	$(OCAMLC) $(OCAMLFLAGS) -o $@ $(LABLGLCMAS) $+
+%: $(CMOS) %.cmo $(MLIS)
+	$(OCAMLC) -o $@ $^
 
-MultiEnsemble.cma: MultiEnsemble.ml MultiEnsemble.cmi
-	$(OCAMLC) $(OCAMLFLAGS) -o $@ -a $<
+
+# Dependencies
+MultiEnsemble.cmo: MultiEnsemble.ml MultiEnsemble.cmi
+	$(OCAMLC) -c $<
 MultiEnsemble.cmi: MultiEnsemble.mli
-	$(OCAMLC) $(OCAMLFLAGS) -c $<
-MultiEnsemble.cmo: MultiEnsemble.ml
-	$(OCAMLC) $(OCAMLFLAGS) -c $<
+	$(OCAMLC) -c $<
 
-regle.cmi: regle.mli MultiEnsemble.cmi
-	$(OCAMLC) $(OCAMLFLAGS) -c $<
+dictionnaire.cmo: dictionnaire.ml dictionnaire.cmi
+	$(OCAMLC) -pp camlp4o.opt -c $<
+dictionnaire.cmi: dictionnaire.mli
+	$(OCAMLC) -c $<
 
-Rummikub.cma: Rummikub.ml regle.cmi
-	$(OCAMLC) $(OCAMLFLAGS) -o $@ -a $<
-Rummikub.cmo: Rummikub.ml
-	$(OCAMLC) $(OCAMLFLAGS) -c $<
+RRummikub.cmo: RRummikub.ml RRummikub.cmi
+	$(OCAMLC) -c $<
+RRummikub.cmi: RRummikub.mli MultiEnsemble.cmi regle.cmi
+	$(OCAMLC) -c $<
 
+rami.cmo: rami.ml rami.cmi
+	$(OCAMLC) -c $<
+rami.cmi: rami.mli MultiEnsemble.cmi regle.cmi
+	$(OCAMLC) -c $<
+
+regle.cmi: regle.mli
+	$(OCAMLC) -c $<
+
+
+# CLEANING RULES
 clean:
-	rm -vf $(foreach lib, $(LIB), $(addprefix $(lib),.cma .cmi .cmo))
-	rm -vf $(foreach lib, $(MLIS), $(addprefix $(lib),.cmi))
+	rm -f $(foreach lib, $(MODULES), $(addprefix $(lib),.cmi))
+	rm -f $(foreach lib, $(LIBS), $(addprefix $(lib),.cma .cmi .cmo))
+	rm -f $(foreach lib, $(EXECUTABLES), $(addprefix $(lib),.cma .cmi .cmo))
+
 mrproper: clean
-	rm -vf $(DEMOS)
+	rm -f $(EXECUTABLES)
 
 .PHONY: all clean mrproper
+

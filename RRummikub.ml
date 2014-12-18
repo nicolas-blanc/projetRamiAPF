@@ -1,4 +1,5 @@
 open MultiEnsemble
+open REGLE
 
 module RRummikub : REGLE =
 struct
