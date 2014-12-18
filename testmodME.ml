@@ -1,0 +1,27 @@
+open MultiEnsemble;;
+let list1 =[(1,1);(2,2);(3,3);(4,4)];;
+let list3 =[(1,3);(2,2);(3,3);(4,5)];;
+
+MultiEnsemble.suppr 2 list1;;
+MultiEnsemble.suppr 1 list1;;
+
+MultiEnsemble.equalmset list1 list3;;
+
+let list3 =[(1,2);(2,3);(3,4);(4,5)];;
+let list2 =[(1,1);(2,2);(3,3);(5,4)];;
+
+MultiEnsemble.unionmset list3 list2;;
+MultiEnsemble.ajoute (1,1) list2;;
+
+let listc =[('a',2);('b',2);('c',3);('d',4)];;
+MultiEnsemble.appmset 'e' listc;;
+let listc2 = MultiEnsemble.ajoute ('e',1) listc;;
+let listc2 = MultiEnsemble.suppr 'e' listc2;;
+MultiEnsemble.equalmset listc listc2;;
+
+let rami = [((3,"rouge"),2);((4,"bleu"),2);((5,"noir"),3);((6,"vert"),4)];;
+let rami3 = [((3,"rouge"),2);((4,"bleu"),2);((5,"noir"),3);((6,"vert"),4)];;
+let rami2 = MultiEnsemble.ajoute ((8,"violet"),1) rami;;
+MultiEnsemble.equalmset rami rami3;;
+let rami4 = MultiEnsemble.suppr (8,"violet") rami2;;
+MultiEnsemble.equalmset rami rami4;;
