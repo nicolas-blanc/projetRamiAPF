@@ -93,6 +93,7 @@
 	  end
 
 
+
 (* Test rapide *)
 (*
 let test = Dictionnaire.add "test" Dictionnaire.(dico_vide());;
