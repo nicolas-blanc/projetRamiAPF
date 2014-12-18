@@ -13,7 +13,7 @@ sig
   val points_finaux : main -> int
   val main_min : int
   val main_initiale : int
-  val lit_valeur : token list -> t
+  (*val lit_valeur : token list -> t*)
   val ecrit_valeur : t -> string
   val fin_pioche_vide : bool
 end;;
