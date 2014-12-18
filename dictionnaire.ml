@@ -1,6 +1,4 @@
 
-module Dictionnaire : TDictionnaire =
-  struct
     type dico =
     | Noeud of dico array * bool
     | Feuille
@@ -93,8 +91,6 @@ module Dictionnaire : TDictionnaire =
 	    end;
 	    Noeud (d, b)
 	  end
-
-end
 
 
 (* Test rapide *)

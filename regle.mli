@@ -5,6 +5,7 @@ sig
   type main = t MultiEnsemble.mset
   type etat = { noms: string array; scores: int array; mains: main array;
 		table: combi list; pioche: main; pose: bool array; tour: int}
+    
   val paquet :t MultiEnsemble.mset
   val combi_valide : combi -> bool
   val premier_coup_valide : main (* main du joueur *) -> combi list (* pose du joueur *) -> main (* nouvelle main du joueur *) -> bool

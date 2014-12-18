@@ -1,8 +1,6 @@
 open MultiEnsemble
-open REGLE
+open Regle
 
-module RRummikub : REGLE =
-struct
   type couleur = Bleu|Rouge|Jaune|Noir
   type t = Tuile of (int*couleur)|Joker
   type combi = t list
@@ -71,7 +69,7 @@ let rec tout_valide (c:combi list):bool = match c with
     |comb::q -> if combi_valide comb then tout_valide q else false
 
 (*Vérifie qu'un premier coup est valide*)
-let premier_coup_valide (*(m:main) main du joueur*) (c:combi list) (* pose du joueur *): bool = 
+let premier_coup_valide (m:main)(* main du joueur*) (c:combi list) (* pose du joueur *) (m2:main): bool = 
   if (tout_valide c) then (if ((points_totaux c 0) >= 30) then true else false) else false
 
 (*Calcul les points restants dans la main d'un joueur*)
@@ -82,7 +80,7 @@ let points_finaux (m:main) : int =
   |((Tuile(n,coul),i)::q) -> points_finaux_aux q (pts+(n*i))
   in points_finaux_aux m 0
 
-end
+let points cl main cl1 main2 : int = 1
 (*
 (*Test premier_coup_vlide*)
 let combijokerTest = [(Tuile(2,Bleu));(Tuile(3,Bleu));Joker;(Tuile(5,Bleu))];;

@@ -5,7 +5,7 @@ MODULES=regle
 CMIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.cmi))
 MLIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.mli))
 
-LIBS=MultiEnsemble RRummikub
+LIBS=MultiEnsemble RRummikub Dictionnaire
 CMOS=$(foreach lib, $(LIBS), $(addprefix $(lib),.cmo))
 
 # ENVIRONMENT
@@ -24,9 +24,9 @@ MultiEnsemble.cmo: MultiEnsemble.ml MultiEnsemble.cmi
 MultiEnsemble.cmi: MultiEnsemble.mli
 	$(OCAMLC) -c $<
 
-dictionnaire.cmo: dictionnaire.ml dictionnaire.cmi
+Dictionnaire.cmo: Dictionnaire.ml Dictionnaire.cmi
 	$(OCAMLC) -pp camlp4o.opt -c $<
-dictionnaire.cmi: dictionnaire.mli
+Dictionnaire.cmi: TDictionnaire.mli
 	$(OCAMLC) -c $<
 
 RRummikub.cmo: RRummikub.ml RRummikub.cmi
