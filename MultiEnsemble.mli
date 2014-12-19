@@ -36,5 +36,7 @@ val suppr : ('t*int)-> 't mset -> 't mset
 (*Rend un msetvide.*)
 val msetvide : 't mset
 
-(*Fait la différence entre 2 msets.*)
+(*Fait la différence entre 2 msets.
+Entrées: Les 2 msets sur lesquels on veut faire la différence.
+Sortie: Le mset qui contient les differences.*)
 val diff : 't mset -> 't mset -> 't mset

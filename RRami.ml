@@ -1,6 +1,5 @@
+  open MultiEnsemble
 
-module RRami : TRami = 
-struct
   type t = Tuile of char | Joker
   type combi = t list
   type main = t MultiEnsemble.mset
@@ -11,8 +10,12 @@ struct
   let rec nbElement = function
     | [] -> 0
     | (e::q) -> (nbElement q)
+  
+  let rec unionTmset list mset = match list with
+    | [] -> mset
+    | e::q -> unionTmset q (MultiEnsemble.ajoute (e,1) mset)
 
-  let lettreMain mainJ newMain combi = MultiEnsemble.equalmset mainJ (MultiEnsemble.uniontmset combi newMain)
+  let lettreMain (mainJ:main) (newMain: main) (combi: t list) : bool = MultiEnsemble.equalmset mainJ (unionTmset combi newMain)
 
   let rec equalCombi c e = match c,e with
     | [],[] -> true
@@ -59,4 +62,3 @@ struct
 
 (* val fin_pioche_vide : bool *)
   let fin_pioche_vide = false
-end

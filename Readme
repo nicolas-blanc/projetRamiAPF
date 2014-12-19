@@ -1,0 +1,84 @@
+ 
+ ______     ______     ______     __    __     __        
+/\  __ \   /\  ___\   /\  __ \   /\ "-./  \   /\ \       
+\ \ \/\ \  \ \ \____  \ \  __ \  \ \ \-./\ \  \ \ \____  
+ \ \_____\  \ \_____\  \ \_\ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_____/   \/_____/   \/_/\/_/   \/_/  \/_/   \/_____/ 
+  ------------------------------------------------------
+
+  Le but de ce projet est de programmer les différentes variantes du rami qui utilisent des pieces avec des lettres
+  (rami), des chiffres (Rummikub) ou des cartes (rami/canasta).
+  Pour cela nous devions réaliser divers modules afin d'avoir une réalisation relativement propre.
+
+  La réalisation de modules de règles précises se basant tous sur le module règle permet de pouvoir utiliser un foncteur
+  sur le module de jeu qui peut gérer une partie pour n'importe quel type de jeu.
+
+  Une partie importante du projet est la gestion des structures de données qui permettent de modéliser le jeu.
+  Carte, pieces de jeu, Mains des joueurs, pioche etc.
+
+  Enfin, une partie se concentre sur la possibilité de sauvegarder, puis de reprendre une partie, à partir d'un fichier.
+
+  ------------------------------------------------------
+  EXERCICES
+  ------------------------------------------------------
+  Multi-ensemble : |
+--------------------
+
+  Le module MultiEnsemble fonctionne dans son intégralité.
+  Les fonctions nil, d'ajout d'union, d'appartenance et d'égalité demandé sur le sujet fonctionne.
+  Nous l'avons compléter avec des fonctions comme la suppression.
+
+--------------------
+  Dictionnaire :   |
+--------------------
+
+  Le module dictionnaire fonctionne également totalment.
+  La fonction "member" est fonctionnel et gére la cas spécial du joker.
+  La fonction "add" permet bien d'ajouter un mot au dictionnaire.
+  La fonction "remove" supprime bien un mot.
+  La fonctin "to_list" renvoie bien une liste de chaines de caractères des mots contenus dans le dictionnaire.
+
+---------------------------------------------
+  Sauvegarde et lecture dans un fichier :   |
+---------------------------------------------
+
+  Nous avions décider de garder cela pour la fin mais n'avons pas eu le temps de l'implémenter.
+
+----------------------------
+  Rami des lettres :       |
+----------------------------
+
+Le module de règle a été implémenté en quasi totalité.
+
+----------------------------
+Rummikub :                 |
+----------------------------
+
+Le module régle appliqué au cas du Rummikub a été implémenté en quasi totalité.
+
+La fonction premier_coup_valide n'est pas implémenté en entier. En l'état, elle vérifie que toute les combinaisons soit valide et que le totale des points soit bien supérieur à 30, mais elle ne fait aucune opérations sur la main du joueur.
+De plus, la réalisation d'une des fonctions intervenants dans le calcul des points impose que les combinaisons ne commencent pas par un joker.
+
+--------------------------
+Jouer : 				 |
+--------------------------
+
+Le module "jouer" n'a pas pu être implémenté.
+
+-----------------------------------------------------------
+Remerciements :			|
+-------------------------
+
+Merci à Rémi GATTAZ pour ses explications sur le Makefile.
+Merci à Quentin GERRY pour ses conseils globaux.
+
+-----------------------------------------------------------
+Exécution :		  |	
+-------------------
+
+Pour tester le projet, il suffit de lancer le make.
+
+Cela va générer deux exécutables, TestDictionnaire et TestMultiEnsemble, permettant de tester 
+respectivement le module dictionnaire et le module multi-ensemble.
+
+-----------------------------------------------------------------

@@ -35,10 +35,14 @@ le numéro du tour en cours.*)
   Sortie: Valeur de la main.*)
   val points_finaux : main -> int
 
+  (*Indique le nombre minimum de piece qu'un joueur doit posséder dans sa main apres avoir jouer.*)
   val main_min : int
 
+  (*Nombre de piece par joueur au début du partie. *)
   val main_initiale : int
+
   (*val lit_valeur : token list -> t*)
+  
   (*val ecrit_valeur : t -> string*)
   val fin_pioche_vide : bool
 end
