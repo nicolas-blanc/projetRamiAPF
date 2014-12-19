@@ -34,10 +34,6 @@ let rec diff (mset1 : 't mset) (mset2 : 't mset) : 't mset  = match mset1,mset2 
   | e::q,[] -> e::q
   | e::q,e2::q2 -> let (el,n) = e2 in if (appmset el mset1) then diff q q2 else e2::(diff q q2)
 
-let rec unionTmset list mset = match list with
-  | [] -> mset
-  | e::q -> unionTmset q (ajoute (e,1) mset)
-
 (*
 Msets permettant de tester la suppression, l'insertion et l'égalité.
 let ltest = [(1,2);(2,5);(3,6)];;

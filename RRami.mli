@@ -1,8 +1,17 @@
-open REGLE
+open Regle
+open MultiEnsemble
 (* open JEU *)
 
 module TRami = 
 sig
+  type t
+
+  (*Represente une liste de pièces, différe du mset par le fait qu'une pièce n'est présente qu'une fois par emplacement.*)
+  type combi = t list
+
+  (*Représente un ensemble de pièces, comme la pioche ou une main de joeurs.*)
+  type main = t MultiEnsemble.mset
+
   (* Permet de compter le nombre d'éléments dans une liste - Equivalent à List.Length
    * Entrée : Liste d'élément
    * Sortie :   
@@ -38,4 +47,4 @@ sig
    * Sortie : Nombre d'élément de la plus grande combinaison de la liste de combinaison
    *)
   val calculPlusGrandMot : combi list -> int
-end
+  val unionTmset : 't list -> 't mset -> 't mset

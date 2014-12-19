@@ -1,11 +1,11 @@
 # Makefile
-EXECUTABLES=TestFonctionnement
+EXECUTABLES=TestDictionnaire TestMultiEnsemble
 
 MODULES=regle
 CMIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.cmi))
 MLIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.mli))
 
-LIBS=MultiEnsemble RRummikub Dictionnaire
+LIBS=MultiEnsemble RRummikub Dictionnaire RRami
 CMOS=$(foreach lib, $(LIBS), $(addprefix $(lib),.cmo))
 
 # ENVIRONMENT
@@ -22,7 +22,7 @@ all: $(EXECUTABLES)
 MultiEnsemble.cmo: MultiEnsemble.ml MultiEnsemble.cmi
 	$(OCAMLC) -c $<
 MultiEnsemble.cmi: MultiEnsemble.mli
-	$(OCAMLC) -c $<
+	$(OCAMLC) -c $<	
 
 Dictionnaire.cmo: Dictionnaire.ml Dictionnaire.cmi
 	$(OCAMLC) -pp camlp4o.opt -unsafe -c $<
@@ -34,15 +34,18 @@ RRummikub.cmo: RRummikub.ml RRummikub.cmi
 RRummikub.cmi: RRummikub.mli MultiEnsemble.cmi regle.cmi
 	$(OCAMLC) -c $<
 
-rami.cmo: rami.ml rami.cmi
+RRami.cmo: RRami.ml RRami.cmi
 	$(OCAMLC) -c $<
-rami.cmi: rami.mli MultiEnsemble.cmi regle.cmi
+RRami.cmi: RRami.mli MultiEnsemble.cmi regle.cmi
 	$(OCAMLC) -c $<
 
 regle.cmi: regle.mli
 	$(OCAMLC) -c $<
 
-TestFonctionnement.cmo: TestFonctionnement.ml Dictionnaire.cmi
+TestDictionnaire.cmo: TestDictionnaire.ml Dictionnaire.cmi
+	$(OCAMLC) -c $<
+
+TestMultiEnsemble.cmo: TestMultiEnsemble.ml MultiEnsemble.cmi
 	$(OCAMLC) -c $<
 
 # CLEANING RULES

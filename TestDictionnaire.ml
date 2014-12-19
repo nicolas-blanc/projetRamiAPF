@@ -1,5 +1,4 @@
 open Dictionnaire
-open MultiEnsemble
 
 let dico1 = Dictionnaire.dico_vide();;
 
@@ -45,32 +44,3 @@ begin
   repdico2 := read_line();
 end
 done;;
-
-
-print_string "On passe aux multi-ensemble: \n";;
-let mtest = MultiEnsemble.msetvide;;
-let mtest = MultiEnsemble.ajoute ("A",3) mtest;;
-let mtest = MultiEnsemble.ajoute ("B",2) mtest;;
-
-let rec affiche_mset (m: 't mset) = match m with
-  |[]-> print_string ""
-  |e::ms -> let (cha,v) = e in let () = print_int v in let () = print_string ("," ^ cha ^ "\n")  in affiche_mset ms;;
-
-print_string ("Le mset initial cotient: \n");;
-affiche_mset mtest;;
-
-let repmset1 = ref "o";;
-let refmset = ref mtest;;
-
-while (!repmset1 = "o") do 
-begin
-  print_string "\n Ajouter un élement dans le mset: \n";
-  refmset := MultiEnsemble.ajoute ((read_line()),(read_int())) !refmset;
-  print_string "\n Voulez vous ajouter un autre élement (o ou n) ?: \n";
-  repmset1 := read_line();
-end
-done;;
-
-print_string ("Le mset contient désormais: \n");;
-affiche_mset !refmset;;
-

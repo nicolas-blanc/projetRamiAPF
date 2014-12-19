@@ -11,7 +11,7 @@ type dico =
  * [pos c] Renvoie la position relation du caractère [c] dans l'alphabet.
  *)
 let pos c =
-  Char.code c - Char.code 'a'
+  Char.code c - Char.code 'A'
 
 (*
  * dico_vide : dico
@@ -35,7 +35,7 @@ let rec member s = function
       b
     else
       begin
-	let s = String.lowercase s in
+	let s = String.uppercase s in
 	let pos_c = pos s.[0] in
 	let s2 = String.sub s 1 (String.length s - 1) in
 	if s.[0] == '*' then (* Cas du joker *)
@@ -56,7 +56,7 @@ let to_list dico =
     | Feuille -> []
     | Noeud(tab,b) -> let listeTemp = ref [] in
 	   for i=0 to 25 do
-	      listeTemp := (!listeTemp)@(to_listAux (tab.(i)) (ch ^ (String.make 1 (char_of_int (48 + i)))));
+	      listeTemp := (!listeTemp)@(to_listAux (tab.(i)) (ch ^ (String.make 1 (char_of_int ((Char.code 'A') + i)))));
 	   done;
 	   if b = true then ch :: (!listeTemp) else !listeTemp
   in to_listAux dico ""
@@ -73,6 +73,7 @@ let rec add s = function
       Noeud (d, true)
     else
       begin
+    let s = String.uppercase s in
 	let pos_c = pos s.[0] in
 	let s2 = String.sub s 1 (String.length s - 1) in
 	begin
