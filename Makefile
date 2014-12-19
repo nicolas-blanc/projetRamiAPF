@@ -1,5 +1,5 @@
 # Makefile
-EXECUTABLES=
+EXECUTABLES=TestFonctionnement
 
 MODULES=regle
 CMIS=$(foreach lib, $(MODULES), $(addprefix $(lib),.cmi))
@@ -12,7 +12,7 @@ CMOS=$(foreach lib, $(LIBS), $(addprefix $(lib),.cmo))
 OCAMLC=ocamlc
 
 # BUILD RULES
-all: $(LIBS)
+all: $(EXECUTABLES)
 
 %: $(CMOS) %.cmo $(MLIS)
 	$(OCAMLC) -o $@ $^
@@ -26,7 +26,7 @@ MultiEnsemble.cmi: MultiEnsemble.mli
 
 Dictionnaire.cmo: Dictionnaire.ml Dictionnaire.cmi
 	$(OCAMLC) -pp camlp4o.opt -c $<
-Dictionnaire.cmi: TDictionnaire.mli
+Dictionnaire.cmi: Dictionnaire.mli
 	$(OCAMLC) -c $<
 
 RRummikub.cmo: RRummikub.ml RRummikub.cmi
@@ -42,6 +42,8 @@ rami.cmi: rami.mli MultiEnsemble.cmi regle.cmi
 regle.cmi: regle.mli
 	$(OCAMLC) -c $<
 
+TestFonctionnement.cmo: TestFonctionnement.ml Dictionnaire.cmi
+	$(OCAMLC) -c $<
 
 # CLEANING RULES
 clean:

@@ -1,4 +1,3 @@
-
     type dico =
     | Noeud of dico array * bool
     | Feuille
@@ -6,10 +5,10 @@
     (*
      * pos : char -> int
      *
-     * [pos c] Renvoie la position relation du caractère [c] dans l'alphabet.
+     * [pos c] Renvoie la position relative du caractère [c] dans l'alphabet.
      *)
     let pos c =
-      Char.code c - Char.code 'a'
+      Char.code c - Char.code 'A'
 
     (*
      * dico_vide : dico
@@ -33,7 +32,7 @@
 	  b
 	else
 	  begin
-	    let s = String.lowercase s in
+	    let s = String.uppercase s in
 	    let pos_c = pos s.[0] in
 	    let s2 = String.sub s 1 (String.length s - 1) in
 	    if s.[0] == '*' then (* Cas du joker *)
@@ -58,6 +57,7 @@
 	  Noeud (d, true)
 	else
 	  begin
+	  	let s = string.uppercase s in
 	    let pos_c = pos s.[0] in
 	    let s2 = String.sub s 1 (String.length s - 1) in
 	    begin
@@ -92,19 +92,35 @@
 	    Noeud (d, b)
 	  end
 
-
+(*to_list*
+Fonction qui convertit un dico en une liste contenant tous les mots acceptés par celui-ci
+Entrée : - dico : Le dico que l'on veut convertir en liste
+Sortie :- La liste contenant tous les mots acceptés par le dico "dico"*)
+let to_list dico = 
+  let rec to_listAux dico ch = match dico with
+    | Feuille -> []
+    | Noeud(tab,b) -> let listeTemp = ref [] in
+	   for i=0 to 25 do
+	      listeTemp := (!listeTemp)@(to_listAux (tab.(i)) (ch ^ (String.make 1 (char_of_int (48 + i)))));
+	   done;
+	   if b = true then ch :: (!listeTemp) else !listeTemp
+  in to_listAux dico ""
 
 (* Test rapide *)
 (*
-let test = Dictionnaire.add "test" Dictionnaire.(dico_vide());;
+let test = add "test" (dico_vide())
 
-let t = Dictionnaire.member "*oua" test
+let t = member "*oua" test
 
-let test = Dictionnaire.add "moua" test
+let test = add "moua" test
 
-let t = Dictionnaire.member "moua" test
+let t = member "moua" test
 
-let test = Dictionnaire.remove "moua" test
+let test = remove "moua" test
 
-let t = Dictionnaire.member "moua" test
-*)
+let t = member "moua" test
+
+let test1 = add "bonjour" test
+
+let ltest = to_list test
+  *)

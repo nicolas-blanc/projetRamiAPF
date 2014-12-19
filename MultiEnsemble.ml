@@ -12,7 +12,7 @@ let rec suppr_totale e mset : 't mset = match mset with
 
 let rec suppr e mset: 't mset =  match mset with
   |[] -> failwith "liste vide"
-  |ec::q -> let (el,i) = ec in if (el = e) then if i-1 > 0 then (el,i-1)::q else q
+  |ec::q -> let (el,i) = ec in let (els,is) = e in if (el = els) then if i-is > 0 then (el,i-is)::q else q
     else ec::(suppr e q);;
 
 let rec appmset t mset : bool = match mset with
@@ -26,7 +26,7 @@ let rec unionmset mset1 mset2 : 't mset = match mset2 with
 let rec equalmset mset1 mset2 : bool = match mset1,mset2 with
   |[],[]-> true
   |[],e::q | e::q,[]-> false
-  |e::q, e2::q2 -> let (el,n) = e2 in if (appmset el mset1) then let res =(suppr el mset1) in equalmset res q2 else false;;
+  |e::q, e2::q2 -> let (el,n) = e2 in if (appmset el mset1) then let res =(suppr e2 mset1) in equalmset res q2 else false;;
 
 let rec diff (mset1 : 't mset) (mset2 : 't mset) : 't mset  = match mset1,mset2 with
   | [],[] -> []
@@ -37,3 +37,11 @@ let rec diff (mset1 : 't mset) (mset2 : 't mset) : 't mset  = match mset1,mset2 
 let rec unionTmset list mset = match list with
   | [] -> mset
   | e::q -> unionTmset q (ajoute (e,1) mset)
+
+(*
+Msets permettant de tester la suppression, l'insertion et l'égalité.
+let ltest = [(1,2);(2,5);(3,6)];;
+let ltest2 = [(1,2);(2,4);(3,5)];;
+let res1= suppr (3,7) ltest;;
+equalmset ltest ltest2;;
+*)

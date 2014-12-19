@@ -1,12 +1,15 @@
 open MultiEnsemble
 open Regle
 
+(*module type RRummikub : REGLE =
+struct*)
   type couleur = Bleu|Rouge|Jaune|Noir
   type t = Tuile of (int*couleur)|Joker
   type combi = t list
   type main = t MultiEnsemble.mset
   type etat = { noms: string array; scores: int array; mains: main array;
-		table: combi list; pioche: main; pose: bool array; tour: int}
+    table: combi list; pioche: main; pose: bool array; tour: int}
+
   let main_min = 0
   let main_initiale = 14
   (*let ecrit_valeur : t -> string*)
@@ -80,7 +83,9 @@ let points_finaux (m:main) : int =
   |((Tuile(n,coul),i)::q) -> points_finaux_aux q (pts+(n*i))
   in points_finaux_aux m 0
 
-let points cl main cl1 main2 : int = 1
+let points (cl1:combi list) (m1:main) (cl1:combi list) (m0:main) : int = 1
+
+(*end*)
 (*
 (*Test premier_coup_vlide*)
 let combijokerTest = [(Tuile(2,Bleu));(Tuile(3,Bleu));Joker;(Tuile(5,Bleu))];;
