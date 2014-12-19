@@ -1,4 +1,4 @@
-1type 't mset = ('t*int) list;;
+type 't mset = ('t*int) list;;
 
 let msetvide = [];;
 
