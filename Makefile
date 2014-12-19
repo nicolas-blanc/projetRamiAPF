@@ -10,7 +10,7 @@ CMOS=$(foreach lib, $(LIBS), $(addprefix $(lib),.cmo))
 
 # ENVIRONMENT
 OCAMLC=ocamlc
-
+OCAMLP=ocamlc -pp "camlp4o.opt -unsafe"
 # BUILD RULES
 all: $(EXECUTABLES)
 
@@ -25,7 +25,7 @@ MultiEnsemble.cmi: MultiEnsemble.mli
 	$(OCAMLC) -c $<
 
 Dictionnaire.cmo: Dictionnaire.ml Dictionnaire.cmi
-	$(OCAMLC) -pp camlp4o.opt -c $<
+	$(OCAMLC) -pp camlp4o.opt -unsafe -c $<
 Dictionnaire.cmi: Dictionnaire.mli
 	$(OCAMLC) -c $<
 

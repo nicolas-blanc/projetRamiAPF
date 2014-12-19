@@ -54,7 +54,7 @@ let mtest = MultiEnsemble.ajoute ("B",2) mtest;;
 
 let rec affiche_mset (m: 't mset) = match m with
   |[]-> print_string ""
-  |e::ms -> let (char,v) = e in let () = print_int v in let () = print_string ("," ^ char ^ "\n")  in affiche_mset ms;;
+  |e::ms -> let (cha,v) = e in let () = print_int v in let () = print_string ("," ^ cha ^ "\n")  in affiche_mset ms;;
 
 print_string ("Le mset initial cotient: \n");;
 affiche_mset mtest;;
